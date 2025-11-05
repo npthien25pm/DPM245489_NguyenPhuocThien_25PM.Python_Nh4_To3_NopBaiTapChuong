@@ -1,0 +1,41 @@
+#Câu 6:Nhập một số n có tối đa 2 chữ số. Hãy cho biết cách đọc ra dạng chữ. 
+def doc_so(n):
+    hang_don_vi = ["", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín"]
+    hang_chuc = ["", "mười", "hai mươi", "ba mươi", "bốn mươi", "năm mươi",
+                 "sáu mươi", "bảy mươi", "tám mươi", "chín mươi"]
+
+    if n < 0 or n > 99:
+        return "Số không hợp lệ. Chỉ cho phép từ 0 đến 99."
+
+    if n < 10:
+        if n == 5:
+            return "năm"
+        else:
+            return hang_don_vi[n]
+    
+    chuc = n // 10
+    don_vi = n % 10
+
+    # Xử lý số có dạng 10, 11–19
+    if chuc == 1:
+        if don_vi == 0:
+            return "mười"
+        elif don_vi == 5:
+            return "mười lăm"
+        else:
+            return "mười " + hang_don_vi[don_vi]
+    else:
+        result = hang_chuc[chuc]
+        if don_vi == 0:
+            return result
+        elif don_vi == 1:
+            result += " mốt"
+        elif don_vi == 5:
+            result += " lăm"
+        else:
+            result += " " + hang_don_vi[don_vi]
+        return result
+
+# Thử nghiệm
+for n in [5, 10, 15, 21, 35, 40, 55, 99]:
+    print(f"{n} => {doc_so(n)}")
